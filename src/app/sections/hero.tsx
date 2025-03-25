@@ -79,7 +79,7 @@ export default function HeroSection() {
               {...fadeInUp}
             >
               <span className="text-winnowred">Winnow</span> Management
-              Solutions LLC
+              Solutions
             </motion.h1>
             <motion.p
               className="text-xl lg:text-2xl mb-8 text-gray-700 dark:text-gray-300"

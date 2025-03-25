@@ -79,7 +79,7 @@ export default function HeroSection() {
               {...fadeInUp}
             >
               <span className="text-winnowred">Winnow</span> Management
-              Solutions
+              Solutions LLC
             </motion.h1>
             <motion.p
               className="text-xl lg:text-2xl mb-8 text-gray-700 dark:text-gray-300"
@@ -100,10 +100,10 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
-                  e.preventDefault(); // Prevent default anchor behavior
+                  e.preventDefault();
                   const targetElement = document.getElementById("About");
                   if (targetElement) {
-                    const offset = 80; // Adjust this value based on your needs (10vh approx. 100px)
+                    const offset = 80; 
                     const elementPosition =
                       targetElement.getBoundingClientRect().top;
                     const offsetPosition =
@@ -111,7 +111,7 @@ export default function HeroSection() {
 
                     window.scrollTo({
                       top: offsetPosition,
-                      behavior: "smooth", // This enables smooth scrolling
+                      behavior: "smooth",
                     });
                   }
                 }}

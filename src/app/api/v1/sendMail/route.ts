@@ -57,7 +57,6 @@ export async function POST(request: Request) {
             <p>This is an automated message. Please do not reply directly to this email.</p>
           </div>
         </div>
-      
       `,
     });
 

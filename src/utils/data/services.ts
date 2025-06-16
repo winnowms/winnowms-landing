@@ -52,6 +52,9 @@ export const services = [
       "Screening against 100+ sanctions including UAE, UN list.",
       "PEP check",
       "Adverse media check",
+      "Ongoing Monitoring with Email Notifications",
+      "Record Keeping"
+
     ],
   },
   {

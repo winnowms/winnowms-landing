@@ -13,12 +13,13 @@ const NAV_ITEMS = [
   { label: "About", href: "/", scrollToId: "About" },
   { label: "Services", href: "/", scrollToId: "Services" },
   { label: "Contact", href: "/", scrollToId: "Contact" },
-  { label: "News Room", href: "/news" }, // External page, normal navigation
+  { label: "News Room", href: "/news" },
 ];
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState("");
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
@@ -27,13 +28,18 @@ export default function Navbar() {
     setMounted(true);
   }, []);
 
+  // Track current URL hash safely after mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentHash(window.location.hash);
+    }
+  }, [mounted, pathname]);
+
   // Smooth scroll when already on homepage with hash
   useEffect(() => {
     if (!mounted) return;
-
-    // If on homepage with hash, scroll smoothly to element
-    if (pathname === "/" && window.location.hash) {
-      const id = window.location.hash.substring(1);
+    if (pathname === "/" && currentHash) {
+      const id = currentHash.substring(1);
       const target = document.getElementById(id);
       if (target) {
         const offset = 80; // navbar height
@@ -42,7 +48,7 @@ export default function Navbar() {
         window.scrollTo({ top, behavior: "smooth" });
       }
     }
-  }, [pathname, mounted]);
+  }, [pathname, mounted, currentHash]);
 
   // Handle link click for smooth scrolling and routing
   const handleScrollTo = useCallback(
@@ -77,27 +83,20 @@ export default function Navbar() {
   // Determine active link styling based on current path & hash
   const isActive = useCallback(
     (href: string, scrollToId?: string) => {
-      if (href === "/blogs") return pathname?.startsWith("/blogs");
+      if (href === "/news") return pathname?.startsWith("/news");
 
-      // For homepage sections, active if pathname="/" and hash matches scrollToId
       if (href === "/" && scrollToId) {
-        if (pathname === "/" && window.location.hash === `#${scrollToId}`) {
+        if (pathname === "/" && currentHash === `#${scrollToId}`) {
           return true;
         }
-        // If URL hash empty but on homepage and scrollToId is "Home", highlight Home
-        if (
-          pathname === "/" &&
-          !window.location.hash &&
-          scrollToId === "Home"
-        ) {
+        if (pathname === "/" && currentHash === "" && scrollToId === "Home") {
           return true;
         }
         return false;
       }
-
       return pathname === href;
     },
-    [pathname]
+    [pathname, currentHash]
   );
 
   return (

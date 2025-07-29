@@ -4,7 +4,8 @@ import Link from "next/link";
 import { blogApi, BlogPostSummary } from "@/lib/apiClient";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "lucide-react";
-import { BlogHeader } from "../../[id]/client-components";
+import dynamic from "next/dynamic";
+
 export const metadata = {
   title: "News Room – Winnow Management Solutions",
   description:
@@ -34,7 +35,9 @@ export default async function BlogsPage({
   }
 
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
-
+  const BlogHeader = dynamic(() => import("../../[id]/client-components").then(mod => mod.BlogHeader), {
+    ssr: false,
+  });
   return (
     <div className="min-h-fit bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}

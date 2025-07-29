@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://localhost:7068/api";
+const BASE_URL = "https://winnowms-backend.azurewebsites.net/api";
 
 // Create axios instance
 const apiClient = axios.create({
